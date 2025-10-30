@@ -1,0 +1,3 @@
+- [x] Fix indentation in generic-text.pug: remove leading space before 'block content'
+- [x] Fix typo in generic-text.pug: change 'Nuncsed' to 'Nunc sed'
+- [x] Fix indentation of piped text in generic-text.pug
