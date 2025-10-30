@@ -1,0 +1,60 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1= location.name
+  .row
+    .col-12.col-lg-9
+      .row
+        .col-12.col-md-6
+          p.rating
+            - for (let i = 0; i < location.rating; i++)
+              i.fas.fa-star
+            - for (let i = location.rating; i < 5; i++)
+              i.far.fa-star
+          p= location.address
+          .card.card-primary
+            .card-block
+              h2.card-title Opening hours
+              each time in location.openingTimes
+                p.card-text
+                  | #{time.days} : 
+                  if time.closed
+                    | closed
+                  else
+                    | #{time.opening} - #{time.closing}
+          .card.card-primary
+            .card-block
+              h2.card-title Facilities
+              each facility in location.facilities
+                span.badge.badge-warning
+                  i.fa.fa-check
+                  | &nbsp;#{facility}
+                | &nbsp;
+        .col-12.col-md-6.location-map
+          .card.card-primary
+            .card-block
+              h2.card-title Location map
+              img.img-fluid.rounded(src="https://i.sstatic.net/dApg7.png")
+      .row
+        .col-12
+          .card.card-primary.review-card
+            .card-block
+              a.btn.btn-primary.float-right(href='/location/review/new') Add review
+              h2.card-title Customer reviews
+              each review in location.reviews
+                .row.review
+                  .col-12.no-gutters.review-header
+                    span.rating
+                      - for (let i = 0; i < review.rating; i++)
+                        i.fas.fa-star
+                      - for (let i = review.rating; i < 5; i++)
+                        i.far.fa-star
+                    span.reviewAuthor #{review.author}
+                    small.reviewTimestamp #{review.timestamp}
+                  .col-12
+                    p= review.reviewText
+    .col-12.col-lg-3
+      p.lead #{sidebar.context}
+      p #{sidebar.callToAction}
